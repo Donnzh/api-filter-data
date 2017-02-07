@@ -1,0 +1,56 @@
+{
+  "name": "coding-challenge",
+  "version": "1.0.0",
+  "description": "API service for filter data from post request",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/run.js",
+    "generate-docs": "apidoc --input server/ --output docs/server/",
+    "erun": "erun "
+  },
+  "erun": {
+    "start": {
+      "cmd": "node ./server/run.js",
+      "env": {}
+    },
+    "dev": {
+      "cmd": "nodemon ./server/run.js",
+      "env": {}
+    },
+    "debug": {
+      "cmd": "nodemon --inspect ./server/run.js",
+      "env": {}
+    },
+    "test": {
+      "cmd": "mocha --timeout 15000 --reporter mochawesome --recursive ./test/**/*.spec.js",
+      "env": {
+        "TEST_TYPE": "internal",
+        "MOCHAWESOME_REPORTDIR": "./reports/test/${NODE_ENV}",
+        "MOCHAWESOME_REPORTNAME": "html-report",
+        "MOCHAWESOME_REPORTTITLE": "Internal Tests on ${NODE_ENV}"
+      }
+    }
+  },
+  "keywords": [
+    "sort data",
+    "challenge"
+  ],
+  "author": "Donnzh",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^4.11.2",
+    "body-parser": "^1.16.0",
+    "config": "^1.25.1",
+    "erun": "^0.5.0",
+    "express": "^4.14.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "mochawesome": "^2.0.2",
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0"
+  }
+}
