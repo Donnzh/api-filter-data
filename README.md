@@ -1,6 +1,6 @@
 # Simple API
 
-A simple API for selecting data
+A simple API for filtering data
 
 ## Install
 
@@ -64,9 +64,17 @@ Production (`NODE_ENV = production`):
 
 ```bash
 npm run erun -- start production
+npm run erun -- forever-start production
+
 ```
 
 Please note Production testing and monitoring is planned to be done using external tools, e.g. postman.
+
+ `forever-start` for deploy run only, make use of a global `forever` installation.
+
+ ```
+ npm install --global forever
+ ```
 
 All test report can be found in the `reports/` folder.
 

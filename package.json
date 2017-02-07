@@ -14,6 +14,10 @@
       "cmd": "node ./server/run.js",
       "env": {}
     },
+    "forever-start": {
+      "cmd": "node ./node_modules/.bin/forever start ./server/run.js",
+      "env": {}
+    },
     "dev": {
       "cmd": "nodemon ./server/run.js",
       "env": {}
@@ -44,6 +48,7 @@
     "config": "^1.25.1",
     "erun": "^0.5.0",
     "express": "^4.14.1",
+    "forever": "^0.15.3",
     "winston": "^2.3.1"
   },
   "devDependencies": {
