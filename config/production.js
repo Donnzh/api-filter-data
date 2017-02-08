@@ -1,7 +1,7 @@
 'use strict';
 
 const config = {
-	//inherited from the default settings, edit production config here
+	//inherited from the default, edit production config here
 	server: {
 		port: 8080
 	}

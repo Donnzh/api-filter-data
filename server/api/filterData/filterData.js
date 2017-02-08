@@ -141,6 +141,7 @@ function filterDataor(params, errback) {
 	errback(undefined, selectedData);
 }
 
+/*** documentation ***/
 /**
  * @api {post} / select data from request.body
  * @apiName filterDataPostRoute

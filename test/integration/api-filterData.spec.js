@@ -11,10 +11,10 @@ chai.use(chatHttp);
 describe('/POST filterData', () => {
 
 	it('should return error when POST invalid JSON data', (done) => {
-
 		chai.request(server)
 			.post('/')
 			.set('Content-Type', 'application/json')
+			//sending invalid JSON
 			.send('{"invalid"}')
 			.end((err, res) => {
 				expect(err).to.exist;
