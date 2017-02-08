@@ -22,11 +22,9 @@ describe('/POST filterData', () => {
 			.end((err, res) => {
 				expect(err).to.exist;
 				expect(res.error).to.exist;
-				expect(res.statusCode).to.equal(404);
+				expect(res.statusCode).to.equal(400);
 				expect(res.body).to.be.an('object');
-				expect(res.body.message).to.equal('invalid data input');
-				expect(res.body.detail[0].keyword).to.equal('additionalProperties');
-				expect(res.body.detail[0].message).to.equal('should NOT have additional properties');
+				expect(res.body.error).to.equal('Could not decode request: JSON parsing failed');
 				done();
 			});
 	});
@@ -60,12 +58,9 @@ describe('/POST filterData', () => {
 			.end((err, res) => {
 				expect(err).to.exist;
 				expect(res.error).to.exist;
-				expect(res.statusCode).to.equal(404);
+				expect(res.statusCode).to.equal(400);
 				expect(res.body).to.be.an('object');
-				expect(res.body.message).to.equal('invalid data input');
-				expect(res.body.detail[0].keyword).to.equal('type');
-				expect(res.body.detail[0].dataPath).to.equal('.payload[0].episodeCount');
-				expect(res.body.detail[0].message).to.equal('should be integer');
+				expect(res.body.error).to.equal('Could not decode request: JSON parsing failed');
 				done();
 			});
 	});

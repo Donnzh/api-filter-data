@@ -121,10 +121,9 @@ const sendDataValidator = ajvInstance.compile({
 
 function filterDataor(params, errback) {
 	if(!sendDataValidator(params)) {
-		winston.error('request data invalid input', sendDataValidator.errors);
+		winston.error('Invalid request data', sendDataValidator.errors);
 		errback({
-			message: 'invalid data input',
-			detail: sendDataValidator.errors
+			error: 'Could not decode request: JSON parsing failed'
 		});
 		return;
 	}
@@ -138,7 +137,7 @@ function filterDataor(params, errback) {
 		}
 		return result;
 	}, []);
-	winston.info('success filtered request data');
+	winston.info('Success filtered request data');
 	errback(undefined, selectedData);
 }
 
@@ -205,7 +204,7 @@ function filterDataPostRoute(req, res) {
 	const params = req.body;
 	filterDataor(params, (err, result) => {
 		if(err) {
-			res.status(404).json(err);
+			res.status(400).json(err);
 			return;
 		}
 		res.status(200).json({
