@@ -10,7 +10,7 @@ chai.use(chatHttp);
 
 describe('/POST filterData', () => {
 
-	it('should return error when POST invalid JSON data', (done) => {
+	it('should return error if POST with invalid JSON data', (done) => {
 		chai.request(server)
 			.post('/')
 			.set('Content-Type', 'application/json')
@@ -27,7 +27,26 @@ describe('/POST filterData', () => {
 			});
 	});
 
-	it('should return error when request data has invalid format', (done) => {
+	it('should return error if POST with valid JSON data but ramdom properties', (done) => {
+		let ramdomProperty = {
+			propertyOne: 'propertyOne',
+			propertyTwo: 'propertyTwo'
+		};
+
+		chai.request(server)
+			.post('/')
+			.send(ramdomProperty)
+			.end((err, res) => {
+				expect(err).to.exist;
+				expect(res.error).to.exist;
+				expect(res.statusCode).to.equal(400);
+				expect(res.body).to.be.an('object');
+				expect(res.body.error).to.equal('Could not filter data: incorrect JSON data');
+				done();
+			});
+	});
+
+	it('should return error if POST with valid JSON data, corect properties but incorrect value type', (done) => {
 		let invalidDataFormat = {
 			skip: 0,
 			take: 7,
