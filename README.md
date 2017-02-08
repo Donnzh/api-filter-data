@@ -1,8 +1,12 @@
-# Simple API
+# API for filter data
 
-A simple API for filtering data
+A simple server for filtering data. A coding challenge.
 
 ## Install
+
+Download or clone first
+
+`git clone git@github.com:Donnzh/api-filter-data.git`
 
 ### Set up NodeJs
 
@@ -35,9 +39,9 @@ npm install
 
 ## Run project
 
-To run, test, code coverage, or postman test, please use the following commands.
+For run, test, or postman test, please use the following commands.
 
-Note: the project manage environments through `erun`, a library which export different `NODE_ENV` and configurations by using different environment variables. Different environments are configurable under `/config` .
+Note: the project manage environments through [`erun`](https://github.com/bguiz/erun), a library which export different `NODE_ENV` and configurations by using different environment variables. Different environments are configurable under `/config` .
 
 Local (`NODE_ENV = localhost`):
 
@@ -60,18 +64,21 @@ npm run erun -- start dev
 npm run erun -- test dev
 ```
 
+- Test report can be found in the `reports/` folder. Look in `reports/test/${NODE_ENV}` for the test results
+
+
+
 Production (`NODE_ENV = production`):
+
+- Please using external tools (e.g. postman) for production testing and monitoring.
 
 ```bash
 npm run erun -- start production
 
 ```
 
-Please note Production testing and monitoring is planned to be done using external tools, e.g. postman.
 
-All test report can be found in the `reports/` folder.
 
-- Look in `reports/test/${NODE_ENV}` for the test results
 
 ## Documentation
 
@@ -81,4 +88,4 @@ To generate documentation for the project, use the following commands.
 npm run generate-docs
 ```
 
-The api documents will be found in the `docs/server/` folder.
+- The api documents will be found in the `docs/server/` folder.
