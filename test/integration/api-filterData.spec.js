@@ -8,8 +8,6 @@ const server = require('../../server/server.js');
 
 chai.use(chatHttp);
 
-
-
 describe('/POST filterData', () => {
 
 	it('should return error when POST invalid JSON data', (done) => {
@@ -121,8 +119,7 @@ describe('/POST filterData', () => {
 				image: 'http://mybeautifulcatchupservice.com/img/shows/TheTaste1280.jpg',
 				slug: 'show/thetaste',
 				title: 'The Taste'
-			}
-			]
+			}]
 		};
 
 		chai.request(server)

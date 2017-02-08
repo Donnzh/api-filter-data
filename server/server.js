@@ -3,7 +3,6 @@
 const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const winston = require('winston');
 
 winston.info('Config', { config: JSON.stringify(config, undefined, 2) });
@@ -12,7 +11,7 @@ winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, config.get('logger.console'));
 
 const server = express();
-const allMiddlewares = [bodyParser.json(), cors()];
+const allMiddlewares = [bodyParser.json()];
 const serverConfig = config.server;
 
 Object.keys(serverConfig.services)
@@ -32,8 +31,9 @@ server.use(function(err, req, res, next) {
 		res.status(err.status).json({
 			error: 'Could not decode request: JSON parsing failed'
 		});
+	} else {
+		res.status(err.status || 500).send('Server error');
 	}
-	res.status(err.status || 500).send('Server error');
 });
 
 module.exports = server;
