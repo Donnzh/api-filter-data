@@ -4,6 +4,9 @@
 /*.log
 .DS_Store
 
+# Heroku start command file
+Procefile
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
