@@ -6,7 +6,7 @@ const config = {
 	// Configure of this server. e.g adding another services
 	server: {
 		version: packageJson.version,
-		port: 3939,
+		port: 8080,
 		services: {
 			'filterData': true
 		}
