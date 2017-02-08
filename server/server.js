@@ -3,6 +3,7 @@
 const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const winston = require('winston');
 
 winston.info('Config', { config: JSON.stringify(config, undefined, 2) });
@@ -11,7 +12,7 @@ winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, config.get('logger.console'));
 
 const server = express();
-const allMiddlewares = [bodyParser.json()];
+const allMiddlewares = [bodyParser.json(), cors()];
 const serverConfig = config.server;
 
 Object.keys(serverConfig.services)

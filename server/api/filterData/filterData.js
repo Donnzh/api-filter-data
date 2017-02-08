@@ -204,10 +204,11 @@ function filterDataPostRoute(req, res) {
 	const params = req.body;
 	filterDataor(params, (err, result) => {
 		if(err) {
-			res.status(400).json(err);
+			res.set('Content-Type', 'application/json');
+			res.status(400).send(err);
 			return;
 		}
-		res.status(200).json({
+		res.json({
 			response: result
 		});
 	});
