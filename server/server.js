@@ -3,9 +3,8 @@
 const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 const winston = require('winston');
-const cookieParser = require('cookie-parser');
 
 winston.info('Config', { config: JSON.stringify(config, undefined, 2) });
 winston.info('NODE_ENV', { NODE_ENV: process.env.NODE_ENV });
@@ -15,9 +14,6 @@ winston.add(winston.transports.Console, config.get('logger.console'));
 const server = express();
 const allMiddlewares = [bodyParser.json(), cors()];
 const serverConfig = config.server;
-server.use(bodyParser.json())
-server.use(bodyParser.urlencoded({ extended: false }));
-server.use(cookieParser());
 
 Object.keys(serverConfig.services)
 	.filter((service) => {
@@ -25,7 +21,19 @@ Object.keys(serverConfig.services)
 	}).forEach((service) => {
 		server.use(
 			'/',
+			allMiddlewares,
 			require(`./api/${service}/routes.js`));
 	});
+
+//error handler
+server.use(function(err, req, res, next) {
+	if(err.status === 400) {
+		winston.error(err.stack);
+		res.status(err.status).json({
+			error: 'Could not decode request: JSON parsing failed'
+		});
+	}
+	res.status(err.status || 500).send('Server error');
+});
 
 module.exports = server;

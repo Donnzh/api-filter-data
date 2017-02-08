@@ -123,7 +123,7 @@ function filterDataor(params, errback) {
 	if(!sendDataValidator(params)) {
 		winston.error('Invalid request data', sendDataValidator.errors);
 		errback({
-			message: 'Could not decode request: JSON parsing failed'
+			error: 'Could not filter data: incorrect JSON data'
 		});
 		return;
 	}
@@ -204,9 +204,7 @@ function filterDataPostRoute(req, res) {
 	const params = req.body;
 	filterDataor(params, (err, result) => {
 		if(err) {
-			res.status(400).json({
-				error: err.message
-			});
+			res.status(400).json(err);
 			return;
 		}
 		res.json({

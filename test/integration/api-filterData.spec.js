@@ -2,26 +2,26 @@
 /* eslint-env mocha */
 
 const chai = require('chai');
-const chatHttp = require('chai-http')
+const chatHttp = require('chai-http');
 const expect = chai.expect;
-const should = chai.should();
 const server = require('../../server/server.js');
 
 chai.use(chatHttp);
 
+
+
 describe('/POST filterData', () => {
 
-	it('should return error when request data invalid', (done) => {
-		let invalidRequestData = {
-			invalidData: 'invalidRequestData'
-		};
+	it('should return error when POST invalid JSON data', (done) => {
 
 		chai.request(server)
 			.post('/')
-			.send(invalidRequestData)
+			.set('Content-Type', 'application/json')
+			.send('{"invalid"}')
 			.end((err, res) => {
 				expect(err).to.exist;
 				expect(res.error).to.exist;
+				expect(res).to.to.have.header('content-type','application/json; charset=utf-8');
 				expect(res.statusCode).to.equal(400);
 				expect(res.body).to.be.an('object');
 				expect(res.body.error).to.equal('Could not decode request: JSON parsing failed');
@@ -60,7 +60,7 @@ describe('/POST filterData', () => {
 				expect(res.error).to.exist;
 				expect(res.statusCode).to.equal(400);
 				expect(res.body).to.be.an('object');
-				expect(res.body.error).to.equal('Could not decode request: JSON parsing failed');
+				expect(res.body.error).to.equal('Could not filter data: incorrect JSON data');
 				done();
 			});
 	});
