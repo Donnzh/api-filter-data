@@ -1,6 +1,12 @@
 # API for filter data
 
-A simple server for filtering data. A coding challenge.
+A simple server for filtering data.
+
+## Example 
+
+current api is avalible at http://codingchallenge.ap-southeast-2.elasticbeanstalk.com/ 
+
+Please find examples in the test folder.
 
 ## Install
 
